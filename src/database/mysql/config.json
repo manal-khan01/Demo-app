@@ -1,0 +1,9 @@
+{
+    "local":{
+        "username": "root",
+        "password": "Nalanda@123",
+        "database": "demo_app",
+        "host": "localhost",
+        "dialect": "mysql"
+    }
+}
