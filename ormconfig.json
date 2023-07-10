@@ -1,0 +1,15 @@
+{
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "root",
+    "password": "Nalanda@123",
+    "database": "demo_app",
+    "synchronize": true,
+    "logging": true,
+    "entities": ["src/module/newStudentManagement/studentEntity.ts"], 
+    "migrations": ["src/database/newMigartions/**/*.ts"],
+    "cli": {
+        "migrationsDir": "src/database/newMigartions/**/*.ts"
+      }
+  }

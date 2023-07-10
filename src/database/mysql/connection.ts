@@ -1,5 +1,4 @@
 import { Sequelize } from "sequelize";
-import mysql from "mysql2/promise";
 import path from "path";
 const Umzug = require('umzug');
 import config from "./config.json";
