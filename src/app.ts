@@ -8,8 +8,6 @@ import { Container } from 'typedi';
 import { useContainer, useExpressServer } from 'routing-controllers';
 import { StudentService } from './module/newStudentManagement/newStudentService';
 import { StudentController } from './module/newStudentManagement/newRoutingController';
-import { DataSource } from 'typeorm';
-// import { connectionOptions } from './module/newStudentManagement/connectionConfig';
 
 
 // Set up TypeDI container

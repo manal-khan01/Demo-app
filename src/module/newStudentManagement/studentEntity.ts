@@ -4,8 +4,8 @@ import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
 
 @Entity({ name: 'newstudents' })
 export class StudentEntity {
-    @PrimaryGeneratedColumn()
-    studentId!: number;
+    @PrimaryGeneratedColumn({type: 'int'})
+    studentId!: string;
 
     @Column()
     name!: string;
@@ -31,18 +31,18 @@ export class StudentEntity {
     @Column()
     createdBy!: string;
 
-    @Column()
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
     createdAt!: Date;
 
-    @Column()
+    @Column({ nullable: true })
     updatedBy!: string;
 
-    @Column()
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
     updatedAt!: Date;
 
-    @Column()
+    @Column({ nullable: true })
     deletedBy!: string;
 
-    @Column()
+    @Column({ nullable: true })
     deletedAt!: Date;
 }

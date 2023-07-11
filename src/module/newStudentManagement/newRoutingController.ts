@@ -16,8 +16,8 @@ export class StudentController {
   async getAllStudents() {
     try {
       console.log("here in controller");
-      await this.studentService.getAllStudents()
-      return Promise.resolve(true)
+      let data = await this.studentService.getAllStudents()
+      return Promise.resolve(data)
     }
     catch (error: any) {
       console.error(error)
@@ -31,8 +31,8 @@ export class StudentController {
   async createNewStudent(@Body() body: any) {
     try {
       console.log("new student body>>")
-      await this.studentService.createNewStudent(body)
-      return Promise.resolve(true)
+      let data = await this.studentService.createNewStudent(body)
+      return Promise.resolve(data)
     }
     catch (error: any) {
       console.error(error)
@@ -44,8 +44,8 @@ export class StudentController {
   async updateStudent(@Param('id') id: string, @Body() body: any) {
     try {
       console.log("update student body>>")
-      await this.studentService.updateStudent(id, body)
-      return Promise.resolve(true)
+      let data = await this.studentService.updateStudent(id, body)
+      return Promise.resolve(data)
     }
     catch (error: any) {
       console.error(error)
@@ -57,8 +57,8 @@ export class StudentController {
   async getStudentById(@Param('id') id: string) {
     try {
       console.log("get student by id body>>")
-      await this.studentService.getStudentById(id)
-      return Promise.resolve(true)
+      let data = await this.studentService.getStudentById(id)
+      return Promise.resolve(data)
     }
     catch (error: any) {
       console.error(error)
@@ -70,8 +70,8 @@ export class StudentController {
   async deleteStudent(@Param('id') id: string) {
     try {
       console.log("delete student by id body>>")
-      await this.studentService.deleteStudent(id)
-      return Promise.resolve(true)
+      let data = await this.studentService.deleteStudent(id)
+      return Promise.resolve(data)
     }
     catch (error: any) {
       console.error(error)
