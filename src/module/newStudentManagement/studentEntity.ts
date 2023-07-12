@@ -1,48 +1,47 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique } from 'typeorm';
 
 
-
 @Entity({ name: 'newstudents' })
 export class StudentEntity {
-    @PrimaryGeneratedColumn({type: 'int'})
+    @PrimaryGeneratedColumn({ type: 'int' })
     studentId!: string;
 
-    @Column()
+    @Column({ nullable: false })
     name!: string;
 
-    @Column()
+    @Column({type: 'date', nullable: false})
     dob!: Date;
 
-    @Column()
+    @Column({ nullable: false })
     gender!: string;
 
-    @Column()
+    @Column({ nullable: false, unique: true })
     email!: string;
 
-    @Column()
+    @Column({ nullable: false, unique: true, length: 10 })
     phoneNumber!: string;
 
-    @Column()
+    @Column({ nullable: false })
     address!: string;
 
-    @Column()
+    @Column({ nullable: true })
     description!: string;
 
-    @Column()
+    @Column({ nullable: true })
     createdBy!: string;
 
-    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     createdAt!: Date;
 
     @Column({ nullable: true })
     updatedBy!: string;
 
-    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP"})
+    @Column({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
     updatedAt!: Date;
 
     @Column({ nullable: true })
     deletedBy!: string;
 
-    @Column({ nullable: true })
+    @Column({ type: "timestamp", nullable: true })
     deletedAt!: Date;
 }
