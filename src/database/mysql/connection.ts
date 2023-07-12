@@ -3,6 +3,9 @@ import path from "path";
 const Umzug = require('umzug');
 import config from "./config.json";
 const dotenv = require('dotenv')
+import "reflect-metadata"
+import { DataSource } from "typeorm";
+import { StudentEntity } from '../../module/newStudentManagement/studentEntity'
 
 dotenv.config()
 
@@ -96,7 +99,36 @@ const seed = new Umzug({
     },
 })
 
+export const AppDataSource = new DataSource({
+    type: "mysql",
+    host: "localhost",
+    port: 3306,
+    username: "root",
+    password: "Nalanda@123",
+    database: "demo_app",
+    entities: [StudentEntity],
+    synchronize: true,
+    logging: false,
+})
+
+async function typeORM() {
+    try {
+        // to initialize initial connection with the database, register all entities
+        // and "synchronize" database schema, call "initialize()" method of a newly created database
+        // once in your application bootstrap
+        AppDataSource.initialize()
+            .then(() => {
+                console.log("connection to database by typeORM successful");
+            })
+            .catch((error) => console.error("error in intializing type orm data source", error))
+    }
+    catch (error: any) {
+        console.error('error in typeORM intializtion function', error)
+    }
+}
+
 /** */
 export async function initMySQLConnection() {
     await initDB();
+    await typeORM();
 }

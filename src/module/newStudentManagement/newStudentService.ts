@@ -1,9 +1,7 @@
 import { Service } from 'typedi';
-import { Connection, createConnection } from 'typeorm';
 import { StudentEntity } from './studentEntity';
-import { where } from 'sequelize';
 import Exception from '../studentManagement/utils/exception';
-
+import { AppDataSource } from "../../database/mysql/connection"
 
 
 
@@ -14,41 +12,33 @@ export class StudentService {
   }
 
   async getAllStudents() {
-    const connection = await createConnection();
     try {
-      const studentRepository = connection.getRepository(StudentEntity);
+      const studentRepository = AppDataSource.getRepository(StudentEntity);
 
       let listOfUsers = await studentRepository.find();
-      await connection.close();
       console.log("successfully fetched list of all students");
       return Promise.resolve(listOfUsers)
     }
     catch (error: any) {
       console.error(error)
-      await connection.close();
       return Promise.reject(error)
     }
   }
 
   async createNewStudent(body: any) {
-    const connection = await createConnection();
     try {
-      const studentRepository = connection.getRepository(StudentEntity);
-      let newUser = studentRepository.create(body);
-      let result = await studentRepository.save(newUser);
-      await connection.close();
+      const studentRepository = AppDataSource.getRepository(StudentEntity);
+      let result = await studentRepository.save(body);
       console.log("student created successfully")
       return Promise.resolve(result)
     }
     catch (error: any) {
       console.error(error)
-      await connection.close();
       return Promise.reject(error)
     }
   }
 
   async updateStudent(id: string, body: any) {
-    const connection = await createConnection();
     try {
       let studentId = id
       let {
@@ -62,7 +52,7 @@ export class StudentService {
         updatedBy,
       } = body
 
-      const studentRepository = connection.getRepository(StudentEntity);
+      const studentRepository = AppDataSource.getRepository(StudentEntity);
 
       let studentExist = await studentRepository.findOne({
         where: {
@@ -95,54 +85,46 @@ export class StudentService {
         },
       });
 
-      await connection.close();
       console.log("student updated successfully");
       return Promise.resolve(updatedStudent)
     }
     catch (error: any) {
       console.error(error)
-      await connection.close();
       return Promise.reject(error)
     }
   }
 
   async getStudentById(id: string) {
-    const connection = await createConnection();
     try {
       let studentId = id;
 
-      const studentRepository = connection.getRepository(StudentEntity);
+      const studentRepository = AppDataSource.getRepository(StudentEntity);
       let user = await studentRepository.findOne({
         where: {
           studentId: studentId,
         },
       });
 
-      await connection.close();
       console.log("successfully fetched studen by studentId")
       return Promise.resolve(user)
     }
     catch (error: any) {
       console.error(error)
-      await connection.close();
       return Promise.reject(error)
     }
   }
 
   async deleteStudent(id: string) {
-    const connection = await createConnection();
     try {
       let studentId = id
-      const studentRepository = connection.getRepository(StudentEntity);
+      const studentRepository = AppDataSource.getRepository(StudentEntity);
 
       let userDelete = await studentRepository.delete(studentId)
-      await connection.close();
       console.log("student deleted successfully");
       return Promise.resolve("student deleted successfully");
     }
     catch (error: any) {
       console.error(error)
-      await connection.close();
       return Promise.reject(error)
     }
 
